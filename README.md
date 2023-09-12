@@ -2,7 +2,7 @@
 Just simple calculator with all abilties of all calculators.
 
 ## Author
- The most genius creator, playboy, philanthropist, or easialy - [oblivisheee](https://github.com/oblivisheee)
+ The most genius creator, playboy, philanthropist, or easialy to say - [oblivisheee](https://github.com/oblivisheee)
 ## How to use?
 
  1. Start the script
