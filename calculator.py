@@ -1,17 +1,16 @@
 import os
 import re
 import time
+
 settings = {
-    'delay_calc': 10,
-    'use_clr': True,
-    'exit_delay': 3,
+    'delay_calc': 10,  # Delay between calculations
+    'use_clr': True,  # Should clear between calculations
+    'exit_delay': 3,  # Delay before exiting
 }
-use_delay = None
+
 while True:
-    if settings['delay_calc'] == None:
-        use_delay = False
     print("Expression like: 5 * 8 ")
-    print('Write "Quit" for exiting.')
+    print('Write "Quit" to exit.')
     expression = input("Write down your math expression: ").replace(" ", "")
 
     if expression.lower() == "quit":
@@ -19,12 +18,10 @@ while True:
         time.sleep(int(settings["exit_delay"]))
         break
 
-    operator_multiply = "*" in expression
-    operator_devide = "/" in expression
-    operator_minus = "-" in expression
-    operator_plus = "+" in expression
+    operators = ['*', '/', '-', '+']
+    operator_found = any(operator in expression for operator in operators)
 
-    if not any([operator_multiply, operator_devide, operator_minus, operator_plus]):
+    if not operator_found:
         raise Exception("Invalid expression")
 
     numbers = [float(num) if '.' in num else int(num) for num in re.findall(r'[-+]?\d*\.\d+|\d+', expression)]
@@ -34,22 +31,28 @@ while True:
 
     result = None
 
-    if operator_multiply:
+    if '*' in expression:
         result = numbers[0]
         for num in numbers[1:]:
             result *= num
-    elif operator_devide:
+    elif '/' in expression:
         result = numbers[0]
         for num in numbers[1:]:
             result /= num
-    elif operator_minus:
+    elif '-' in expression:
         result = numbers[0]
         for num in numbers[1:]:
             result -= num
-    elif operator_plus:
+    elif '+' in expression:
         result = sum(numbers)
 
-    if settings['use_clr']: os.system('clear')
+    if settings['use_clr']:
+        os.system('clear')
+
     print("Answer of expression:", result)
-    if not use_delay is False: time.sleep(int(settings["delay_calc"]))
-    if settings['use_clr'] and not use_delay is False: os.system('clear')
+
+    if settings['delay_calc'] is not None:
+        time.sleep(int(settings["delay_calc"]))
+
+        if settings['use_clr']:
+            os.system('clear')
