@@ -3,9 +3,9 @@ import re
 import time
 
 settings = {
-    'delay_calc': 10,  # Delay between calculations
+    'delay_calc': 2,  # Delay between calculations
     'use_clr': True,  # Should clear between calculations
-    'exit_delay': 3,  # Delay before exiting
+    'exit_delay': 2,  # Delay before exiting
 }
 
 while True:
