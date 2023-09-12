@@ -1,13 +1,22 @@
 import os
 import re
 import time
+settings = {
+    'delay_calc': 10,
+    'use_clr': True,
+    'exit_delay': 3,
+}
+use_delay = None
 while True:
+    if settings['delay_calc'] == None:
+        use_delay = False
     print("Expression like: 5 * 8 ")
-    print("Write Quit for exiting.")
+    print('Write "Quit" for exiting.')
     expression = input("Write down your math expression: ").replace(" ", "")
 
     if expression.lower() == "quit":
         print("Exiting...")
+        time.sleep(int(settings["exit_delay"]))
         break
 
     operator_multiply = "*" in expression
@@ -40,7 +49,7 @@ while True:
     elif operator_plus:
         result = sum(numbers)
 
-    os.system("clear")
+    if settings['use_clr']: os.system('clear')
     print("Answer of expression:", result)
-    time.sleep(5)
-    os.system("clear")
+    if not use_delay is False: time.sleep(int(settings["delay_calc"]))
+    if settings['use_clr'] and not use_delay is False: os.system('clear')
